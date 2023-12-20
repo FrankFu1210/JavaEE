@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<!-- 1. SQL方言與提供連結資料庫所需資訊(透過JNDI API來連結)之設定方式 -->
+		<!-- SQL方言，設定是SQLServer2012 -->
+		<property name="hibernate.dialect">org.hibernate.dialect.SQLServer2012Dialect</property>
+		<property name="connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
+		<property name="connection.url">jdbc:sqlserver://127.0.0.1:1433;DatabaseName=jspdb</property>
+		<property name="connection.username">sa</property>
+		<property name="connection.password">sa123456</property>
+		<!-- 2. 其他與資料存取有關的設定 -->
+		<!-- 自動產生資料庫的Schema -->
+		<property name="hbm2ddl.auto">update</property>
+		<!-- 顯示實際操作資料庫時的SQL -->
+		<property name="show_sql">true</property>
+		<!-- 將顯示的SQL排版，方便觀看 -->
+		<property name="format_sql">true</property>
+
+		<property name="hibernate.current_session_context_class">thread</property>
+		<!-- 定義程式交易管理的類型，本範例使用JDBC Transaction -->
+		<!-- <property name = "transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</property> -->
+		<property name="hibernate.transaction.coordinator_class">jdbc</property>
+		<!-- hibernate 相關效能設定 -->
+		<property name="hibernate.bytecode.use_reflection_optimizer">false</property>
+		<property name="connection_pool_size">8</property>
+		
+		<!-- 3. 宣告程式使用的永續類別 -->
+		<!-- 第1章 -->
+		<mapping class="ch01.ex00.model.Member"></mapping>
+		
+		<mapping class="ch01.model.Department" />
+		<mapping class="ch01.model.Employee" />
+		<!-- 第3章 -->
+		<mapping class="ch03._00.model.MemberBean"></mapping>
+		<mapping class="ch03._00.model.BookBean"></mapping>
+		<!-- 第4章 -->
+		
+		<mapping class="ch04.ex01.model.Category"></mapping>
+		<mapping class="ch04.ex01.model.ProductEntity"></mapping>
+		
+		<mapping class="ch04.ex02.model.Category"></mapping>
+		<mapping class="ch04.ex02.model.ProductEntity"></mapping>
+		
+		<!-- 第5章 -->
+		<!-- one to one 單向-->
+		<mapping class="ch05.one2one._01.anno.model.Principal"></mapping>
+		<mapping class="ch05.one2one._01.anno.model.School"></mapping>
+		<!-- one to one 雙向-->
+		<mapping class="ch05.one2one._02.anno.model.PrincipalBi"></mapping>
+		<mapping class="ch05.one2one._02.anno.model.SchoolBi"></mapping>
+
+		<mapping class="ch05.one2many._00.anno.model.Department" />
+		<mapping class="ch05.one2many._00.anno.model.Employee" />
+		
+		<!-- one to many 單向-->
+		<mapping class="ch05.one2many._01.anno.model.Item" />
+		<mapping class="ch05.one2many._01.anno.model.Cart" />
+		
+		<!-- one to many 雙向-->
+		<mapping class="ch05.one2many._04.anno.model.DepartmentBI" />
+		<mapping class="ch05.one2many._04.anno.model.EmployeeBI" />
+		
+		<!-- many to many -->
+		<mapping class="ch05.many2many._01.anno.model.Book" />
+		<mapping class="ch05.many2many._01.anno.model.Author" />
+		
+		<!-- many to one -->
+		<mapping class="ch05.many2one._01.anno.model.EmployeeUNI" />
+		<mapping class="ch05.many2one._01.anno.model.EmployerUNI" />
+		
+		<!-- 第6章 -->
+		<mapping class="ch06.model.Book"></mapping>
+		<mapping class="ch06.model.BookCompany"></mapping>
+		<mapping class="ch06.model.Employee"></mapping>
+		<mapping class="ch06.model.EmployeeA"></mapping>
+
+	</session-factory>
+</hibernate-configuration>
